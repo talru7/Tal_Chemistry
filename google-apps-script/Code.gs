@@ -15,8 +15,11 @@ function doPost(e) {
 
     const name = clean_(data.name, 80);
     const phone = clean_(data.phone, 30);
-    const subject = clean_(data.subject, 120);
+    const subject = clean_(data.subject || data.course, 120);
     const message = clean_(data.message, 1000);
+    const submittedId = clean_(data.leadId, 36);
+    const leadId = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(submittedId)
+      ? submittedId : Utilities.getUuid();
 
     if (!name || !phone) {
       return response_({ ok: false, error: 'missing_required_fields' });
@@ -27,7 +30,9 @@ function doPost(e) {
       throw new Error('Lead sheet not found');
     }
 
-    const leadId = Utilities.getUuid();
+    if (findLead_(sheet, leadId)) {
+      return response_({ ok: true, leadId });
+    }
     const row = firstEmptyRow_(sheet);
     sheet.getRange(row, 1, 1, 8).setValues([[
       new Date(),
@@ -67,6 +72,30 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+function doGet(e) {
+  const data = e && e.parameter ? e.parameter : {};
+  const leadId = clean_(data.leadId, 36);
+  const callback = String(data.callback || '');
+  const validId = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(leadId);
+  const received = validId && findLead_(
+    SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_NAME), leadId
+  );
+  const payload = JSON.stringify({ received: Boolean(received) });
+
+  if (/^[A-Za-z_$][\w$]{0,80}$/.test(callback)) {
+    return ContentService.createTextOutput(`${callback}(${payload});`)
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
+  return ContentService.createTextOutput(payload)
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function findLead_(sheet, leadId) {
+  if (!sheet || sheet.getLastRow() < 2) return false;
+  return Boolean(sheet.getRange(2, 8, sheet.getLastRow() - 1, 1)
+    .createTextFinder(leadId).matchEntireCell(true).findNext());
 }
 
 function firstEmptyRow_(sheet) {

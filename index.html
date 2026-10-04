@@ -1180,6 +1180,16 @@
       font-size: .84rem;
       text-align: center;
     }
+    .lead-status {
+      min-height: 1.5em;
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: .9rem;
+      text-align: center;
+    }
+    .lead-status[data-state="success"] { color: var(--green); }
+    .lead-status[data-state="error"] { color: #9b3f30; }
+    .lead-submit:disabled { cursor: default; opacity: .78; }
     .contact-whatsapp-btn {
       display: flex;
       align-items: center;
@@ -1599,7 +1609,7 @@
         <div class="contact-form-card">
           <h3>להשאיר פרטים</h3>
           <p>כמה פרטים קצרים ואחזור אליך.</p>
-          <form id="lead-form" action="#" method="post">
+          <form id="lead-form" action="https://script.google.com/macros/s/AKfycbwNg77KDTwKHbHyjSK9MD9nISyZMAhKe7j1MyN1bXAh5E4_WlV0ylceUtWN-OTo4YYm/exec" method="post">
             <div class="lead-fields">
               <label class="field">
                 <span>שם</span>
@@ -1616,6 +1626,7 @@
             </div>
             <button class="lead-submit" type="submit">שליחת פרטים</button>
             <p class="privacy-note">הפרטים ישמשו רק כדי לחזור אליך.</p>
+            <p class="lead-status" id="lead-status" role="status" aria-live="polite"></p>
           </form>
         </div>
         <div class="contact-whatsapp-card">
@@ -1643,8 +1654,60 @@
 <script>
 const leadForm=document.getElementById('lead-form');
 if(leadForm){
-  leadForm.addEventListener('submit',(event)=>{
+  const leadStatus=document.getElementById('lead-status');
+  const leadSubmit=leadForm.querySelector('.lead-submit');
+  let pendingLead=null;
+  const setStatus=(message,state='')=>{
+    leadStatus.textContent=message;
+    leadStatus.dataset.state=state;
+  };
+  const wait=(ms)=>new Promise(resolve=>setTimeout(resolve,ms));
+  const checkLead=(leadId)=>new Promise((resolve,reject)=>{
+    const callbackName='leadStatus_'+leadId.replace(/-/g,'');
+    const script=document.createElement('script');
+    const cleanup=()=>{
+      clearTimeout(timeout);
+      delete window[callbackName];
+      script.remove();
+    };
+    const timeout=setTimeout(()=>{cleanup();reject(new Error('status_timeout'));},8000);
+    window[callbackName]=(result)=>{cleanup();resolve(result && result.received===true);};
+    script.onerror=()=>{cleanup();reject(new Error('status_unavailable'));};
+    const url=new URL(leadForm.action);
+    url.searchParams.set('leadId',leadId);
+    url.searchParams.set('callback',callbackName);
+    script.src=url.toString();
+    document.head.appendChild(script);
+  });
+  leadForm.addEventListener('submit',async(event)=>{
     event.preventDefault();
+    if(leadSubmit.disabled || !leadForm.reportValidity()) return;
+    const formData=new FormData(leadForm);
+    const fields=JSON.stringify([formData.get('name'),formData.get('phone'),formData.get('course')]);
+    if(!pendingLead || pendingLead.fields!==fields){
+      pendingLead={id:crypto.randomUUID(),fields};
+    }
+    formData.set('leadId',pendingLead.id);
+    leadSubmit.disabled=true;
+    leadSubmit.textContent='שולחים...';
+    setStatus('הפרטים נשלחים...');
+    try{
+      await fetch(leadForm.action,{method:'POST',mode:'no-cors',body:formData});
+      let received=false;
+      for(let attempt=0;attempt<6 && !received;attempt++){
+        if(attempt) await wait(2000);
+        try{ received=await checkLead(pendingLead.id); }catch(error){ /* Try again while the request settles. */ }
+      }
+      if(!received) throw new Error('not_confirmed');
+      pendingLead=null;
+      leadForm.reset();
+      setStatus('הפרטים התקבלו. אחזור אליך בהקדם.','success');
+    }catch(error){
+      setStatus('לא הצלחנו לאשר שהפרטים נשמרו. אפשר לנסות שוב או לפנות בוואטסאפ.','error');
+    }finally{
+      leadSubmit.disabled=false;
+      leadSubmit.textContent='שליחת פרטים';
+    }
   });
 }
 </script>
