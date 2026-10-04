@@ -1387,6 +1387,11 @@
 
     .contact-form-card h3 {
       color: var(--green) !important;
+      text-align: center;
+    }
+
+    .contact-form-card > p {
+      text-align: center;
     }
 
     .contact-whatsapp-card {
@@ -1477,12 +1482,17 @@
 
     @media (max-width: 640px) {
       .contact-whatsapp-card {
-        gap: 12px !important;
+        gap: 8px !important;
+      }
+
+      .contact-character-wrap {
+        overflow: visible;
       }
 
       .contact-character {
         width: min(100%, 360px);
         max-height: 270px;
+        transform: scale(1.07);
       }
     }
 
