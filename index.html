@@ -1272,6 +1272,159 @@
       }
     }
 
+
+    /* School-year update v2 polish */
+    .chem-intro {
+      text-align: center !important;
+      margin-inline: auto !important;
+    }
+
+    .chem-group {
+      text-align: center !important;
+    }
+
+    .chem-group h3 {
+      text-align: center !important;
+      width: 100%;
+    }
+
+    .chem-group .chips {
+      justify-content: center !important;
+      align-items: center;
+    }
+
+    /* Contact section: richer brand color dynamics */
+    .contact-shell {
+      background:
+        radial-gradient(circle at 8% 12%, rgba(255,122,79,.20), transparent 30%),
+        radial-gradient(circle at 88% 86%, rgba(201,242,107,.22), transparent 34%),
+        linear-gradient(145deg, rgba(255,250,240,.96), rgba(247,240,222,.92)) !important;
+      border-color: rgba(18,59,46,.15) !important;
+      box-shadow:
+        0 24px 64px rgba(18,59,46,.10),
+        inset 0 0 0 1px rgba(255,255,255,.55) !important;
+    }
+
+    .contact-form-card {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,250,240,.72)) !important;
+      border-color: rgba(255,122,79,.22) !important;
+      box-shadow: inset 0 4px 0 rgba(255,122,79,.72);
+    }
+
+    .contact-whatsapp-card {
+      background:
+        radial-gradient(circle at 88% 14%, rgba(201,242,107,.34), transparent 34%),
+        linear-gradient(160deg, rgba(18,59,46,.10), rgba(36,106,82,.16)) !important;
+      border-color: rgba(36,106,82,.24) !important;
+      box-shadow: inset 0 4px 0 rgba(201,242,107,.82);
+    }
+
+    .contact-form-card h3 {
+      color: var(--coral) !important;
+    }
+
+    .contact-whatsapp-card h3 {
+      color: var(--green) !important;
+    }
+
+    .lead-submit {
+      background:
+        linear-gradient(135deg, var(--green), var(--green2)) !important;
+      box-shadow: 0 12px 28px rgba(18,59,46,.18);
+    }
+
+    .contact-whatsapp-btn {
+      background:
+        linear-gradient(135deg, var(--green), #0b241c) !important;
+      box-shadow: 0 16px 34px rgba(18,59,46,.22) !important;
+    }
+
+    @media (max-width: 640px) {
+      .chem-intro {
+        text-align: center !important;
+      }
+
+      .chem-group {
+        text-align: center !important;
+      }
+
+      .chem-group .chips {
+        justify-content: center !important;
+      }
+    }
+
+
+    /* School-year update v3: elegant contact palette */
+    .contact-shell {
+      background:
+        radial-gradient(circle at 10% 8%, rgba(255,122,79,.10), transparent 28%),
+        radial-gradient(circle at 90% 92%, rgba(201,242,107,.10), transparent 32%),
+        linear-gradient(145deg, rgba(255,250,240,.97), rgba(247,240,224,.93)) !important;
+      border-color: rgba(18,59,46,.13) !important;
+      box-shadow:
+        0 22px 58px rgba(18,59,46,.09),
+        inset 0 0 0 1px rgba(255,255,255,.58) !important;
+    }
+
+    .contact-form-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,250,240,.82)) !important;
+      border-color: rgba(18,59,46,.12) !important;
+      box-shadow: 0 10px 28px rgba(18,59,46,.05) !important;
+    }
+
+    .contact-form-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, rgba(255,122,79,.78), rgba(255,179,109,.42));
+    }
+
+    .contact-form-card h3 {
+      color: var(--green) !important;
+    }
+
+    .contact-whatsapp-card {
+      background:
+        radial-gradient(circle at 90% 14%, rgba(201,242,107,.16), transparent 34%),
+        linear-gradient(160deg, rgba(18,59,46,.075), rgba(36,106,82,.105)) !important;
+      border-color: rgba(36,106,82,.18) !important;
+      box-shadow: 0 12px 30px rgba(18,59,46,.06) !important;
+    }
+
+    .contact-whatsapp-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 1px rgba(201,242,107,.10);
+    }
+
+    .contact-whatsapp-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lead-submit {
+      background: var(--green) !important;
+      box-shadow: 0 12px 26px rgba(18,59,46,.16) !important;
+    }
+
+    .contact-whatsapp-btn {
+      background: var(--green) !important;
+      box-shadow: 0 14px 30px rgba(18,59,46,.20) !important;
+    }
+
+    .contact-whatsapp-btn:hover {
+      background: #0b241c !important;
+    }
+
 </style>
 </head>
 <body>
@@ -1350,7 +1503,7 @@
     </div>
   </div>
 </div></div></div></div></section>
-      <section class="section alt" id="flow"><div class="container"><div class="flow-wrap reveal"><h2 class="flow-title">החומר נראה אחרת כשמבינים איך לגשת אליו</h2><div class="flow"><div class="flow-step"><div class="flow-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="15"/><circle cx="24" cy="24" r="7"/><path d="M24 7V3M24 45v-4M41 24h4M3 24h4"/><path d="M24 24 34 14"/></svg></div><strong>ממפים</strong><span>מה לא ברור ומה המטרה הקרובה</span></div><div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div><div class="flow-step"><div class="flow-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M14 10h22a3 3 0 0 1 3 3v25H9V13a3 3 0 0 1 3-3h2"/><path d="M17 7h14v8H17z"/><path d="M17 24h16M17 31h16M17 38h11"/><path d="M12 24h.1M12 31h.1M12 38h.1"/></svg></div><strong>מסדרים</strong><span>מפרקים את הנושא לחלקים פשוטים</span></div><div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div><div class="flow-step"><div class="flow-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 6a14 14 0 0 0-8 25.5c2 1.4 3 3.2 3 5.5h10c0-2.3 1-4.1 3-5.5A14 14 0 0 0 24 6Z"/><path d="M19 42h10M20 36h8"/><path d="M21 24l3 3 6-8"/></svg></div><strong>מבינים</strong><span>מחברים בין העקרונות ולא רק משננים</span></div><div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div><div class="flow-step"><div class="flow-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M12 8h20l6 6v26H12z"/><path d="M32 8v7h7"/><path d="M18 24h12M18 31h9"/><path d="M32 35 39 28l3 3-7 7-5 2 2-5Z"/></svg></div><strong>מתרגלים</strong><span>פותרים שאלות ובודקים דרך חשיבה</span></div><div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div><div class="flow-step"><div class="flow-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 8h22l5 5v27H11z"/><path d="M33 8v6h6"/><path d="M18 20c.4-3 2.5-4.8 5.7-4.8 3.4 0 5.8 1.9 5.8 4.8 0 4.2-5.2 4.1-5.2 8"/><path d="M24.3 33h.1"/><path d="M30 37h10"/><path d="m36 32 5 5-5 5"/></svg></div><strong>מיישמים</strong><span>יודעים איך להתחיל גם כשמגיעה שאלה חדשה</span></div></div></div></section>
+      <section class="section alt" id="flow"><div class="container"><div class="flow-wrap reveal"><h2 class="flow-title">החומר נראה אחרת כשמבינים איך לגשת אליו</h2><div class="flow"><div class="flow-step"><div class="flow-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="15"/><circle cx="24" cy="24" r="7"/><path d="M24 7V3M24 45v-4M41 24h4M3 24h4"/><path d="M24 24 34 14"/></svg></div><strong>ממפים</strong><span>מה לא ברור ומה המטרה הקרובה</span></div><div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div><div class="flow-step"><div class="flow-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M14 10h22a3 3 0 0 1 3 3v25H9V13a3 3 0 0 1 3-3h2"/><path d="M17 7h14v8H17z"/><path d="M17 24h16M17 31h16M17 38h11"/><path d="M12 24h.1M12 31h.1M12 38h.1"/></svg></div><strong>מסדרים</strong><span>מפרקים את הנושא לחלקים פשוטים</span></div><div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div><div class="flow-step"><div class="flow-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 6a14 14 0 0 0-8 25.5c2 1.4 3 3.2 3 5.5h10c0-2.3 1-4.1 3-5.5A14 14 0 0 0 24 6Z"/><path d="M19 42h10M20 36h8"/><path d="M21 24l3 3 6-8"/></svg></div><strong>מבינים</strong><span>מחברים בין העקרונות ולא רק משננים</span></div><div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div><div class="flow-step"><div class="flow-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M12 8h20l6 6v26H12z"/><path d="M32 8v7h7"/><path d="M18 24h12M18 31h9"/><path d="M32 35 39 28l3 3-7 7-5 2 2-5Z"/></svg></div><strong>מתרגלים</strong><span>פותרים שאלות ובודקים דרך חשיבה</span></div><div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></div><div class="flow-step"><div class="flow-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M11 8h22l5 5v27H11z"/><path d="M33 8v6h6"/><path d="M17 25l5 5 10-12"/><path d="M30 37h10"/><path d="m36 32 5 5-5 5"/></svg></div><strong>מיישמים</strong><span>יודעים איך להתחיל גם כשמגיעה שאלה חדשה</span></div></div></div></section>
 <section class="flow-standalone-cta" aria-label="יצירת קשר בוואטסאפ">
   <a class="whatsapp-stack-btn" href="https://wa.me/972508148081?text=%D7%94%D7%99%D7%99%20%D7%98%D7%9C%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%93%D7%91%D7%A8%20%D7%A2%D7%9C%20%D7%A9%D7%99%D7%A2%D7%95%D7%A8%20%D7%91%D7%9B%D7%99%D7%9E%D7%99%D7%94" target="_blank" rel="noopener">
     <span>בואו נדבר</span>
